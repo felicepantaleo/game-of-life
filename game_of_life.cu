@@ -9,6 +9,7 @@
 #include <random>
 #include <string>
 #include <vector>
+#include <chrono>
 
 // Include the GIF library unconditionally
 #include "gif-h/gif.h"
@@ -17,7 +18,7 @@
 #include <cuda_runtime.h>
 
 // Compile-time variable to control saving grids
-constexpr bool SAVE_GRIDS = true; // Set to true to enable GIF output
+constexpr bool SAVE_GRIDS = false; // Set to true to enable GIF output
 
 void print_help() {
   std::cout << "Prey-Predator Simulation with Custom Rules\n\n";
@@ -408,10 +409,15 @@ int main(int argc, char *argv[]) {
   int num_threads = 256;
   int num_blocks = (width * height + num_threads - 1) / num_threads;
 
+  // Measure time
+  auto start = std::chrono::high_resolution_clock::now();
   for (size_t i = 0; i < NUM_ITERATIONS; ++i) {
     update_grid_cuda<<<num_blocks, num_threads>>>(d_current_grid, d_new_grid,
                                                   width, height);
-    cudaDeviceSynchronize();
+    if constexpr (SAVE_GRIDS){
+      // Wait for kernel to finish
+      cudaDeviceSynchronize();
+    }
 
     // Swap the grids
     std::swap(d_current_grid, d_new_grid);
@@ -425,6 +431,11 @@ int main(int argc, char *argv[]) {
       save_frame_as_gif(grid, writer, width, height);
     }
   }
+  cudaDeviceSynchronize();
+
+  auto end = std::chrono::high_resolution_clock::now();
+  std::chrono::duration<double> elapsed_seconds = end - start;
+  std::cout << "Elapsed time of CUDA version: " << elapsed_seconds.count() << "s\n";
 
   if constexpr (SAVE_GRIDS) {
     GifEnd(&writer);

@@ -9,6 +9,7 @@
 #include <random>
 #include <string>
 #include <vector>
+#include <chrono>
 
 // Include the GIF library unconditionally
 #include "gif-h/gif.h"
@@ -423,11 +424,15 @@ int main(int argc, char *argv[]) {
   }
 
   // Simulation loop
+  auto start = std::chrono::high_resolution_clock::now();
   for (size_t i = 0; i < NUM_ITERATIONS; ++i) {
     update_grid_sequential(grid, new_grid);
     save_frame_as_gif(grid, writer);
     std::swap(grid, new_grid);
   }
+  auto end = std::chrono::high_resolution_clock::now();
+  std::chrono::duration<double> elapsed_seconds = end - start;
+  std::cout << "Elapsed time of sequential version: " << elapsed_seconds.count() << "s\n";
 
   if constexpr (SAVE_GRIDS) {
     GifEnd(&writer);
