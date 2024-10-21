@@ -1,4 +1,4 @@
-// Save this code in a file named 'game_of_life.cpp'
+// Original Author: Felice Pantaleo (CERN), 2024
 
 #include <algorithm>
 #include <cassert>
@@ -15,7 +15,7 @@
 #include "gif.h"
 
 // Compile-time variable to control saving grids
-constexpr bool SAVE_GRIDS = true; // Set to true to enable GIF output
+constexpr bool SAVE_GRIDS = false; // Set to true to enable GIF output
 
 void print_help() {
   std::cout << "Prey-Predator Simulation with Custom Rules\n\n";

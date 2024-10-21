@@ -1,4 +1,4 @@
-// Save this code in a file named 'game_of_life.cu'
+// Original Author: Felice Pantaleo (CERN), 2024
 
 #include <algorithm>
 #include <cassert>
