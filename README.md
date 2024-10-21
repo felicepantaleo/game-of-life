@@ -1,22 +1,18 @@
 ### Options:
 
-    `--help`
-    Display help message.
+`--help`
+Display help message.
 
-    `--seed <value>`
-    Set the random seed.
-
-    `--weights <empty> <predator> <prey>`
-    Set the integer weights for cell states.
-
-    `--width <value>`
-    Set the grid width (default: 200).
-
-    `--height <value>`
-    Set the grid height (default: 200).
-
-    `--verify <file>`
-    Verify the grid against a reference file.
+`--seed <value>`
+Set the random seed.
+`--weights <empty> <predator> <prey>`
+Set the integer weights for cell states.
+`--width <value>`
+Set the grid width (default: 200).
+`--height <value>`
+Set the grid height (default: 200).
+`--verify <file>`
+Verify the grid against a reference file.
 
 ### Simulation Rules:
 
