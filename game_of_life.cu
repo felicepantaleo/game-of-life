@@ -12,7 +12,7 @@
 #include <chrono>
 
 // Include the GIF library unconditionally
-#include "gif-h/gif.h"
+#include "gif.h"
 
 // Include CUDA headers
 #include <cuda_runtime.h>

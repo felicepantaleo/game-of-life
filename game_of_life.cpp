@@ -12,7 +12,7 @@
 #include <chrono>
 
 // Include the GIF library unconditionally
-#include "gif-h/gif.h"
+#include "gif.h"
 
 // Compile-time variable to control saving grids
 constexpr bool SAVE_GRIDS = true; // Set to true to enable GIF output
